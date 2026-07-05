@@ -1,4 +1,4 @@
-const cacheName = "shinplay-v2-shell-4";
+const cacheName = "shinplay-v2-shell-5";
 const shellAssets = [
   "./",
   "./index.html",

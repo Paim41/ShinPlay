@@ -933,27 +933,54 @@
   }
 
   function makeMiniPlayerDraggable() {
+    const mobileQuery = window.matchMedia("(max-width: 760px), (pointer: coarse)");
+    const resetMobilePosition = () => {
+      if (!mobileQuery.matches) return;
+      els.miniPlayer.style.removeProperty("left");
+      els.miniPlayer.style.removeProperty("top");
+      els.miniPlayer.style.removeProperty("right");
+      els.miniPlayer.style.removeProperty("bottom");
+      els.miniPlayer.style.removeProperty("--mini-x");
+      els.miniPlayer.style.removeProperty("--mini-y");
+      miniDrag = null;
+    };
+    resetMobilePosition();
+    mobileQuery.addEventListener("change", resetMobilePosition);
+
     els.miniPlayer.addEventListener("pointerdown", (event) => {
+      if (mobileQuery.matches) return;
       if (event.target.closest("button")) return;
+      const style = getComputedStyle(els.miniPlayer);
       miniDrag = {
         startX: event.clientX,
         startY: event.clientY,
-        rect: els.miniPlayer.getBoundingClientRect()
+        rect: els.miniPlayer.getBoundingClientRect(),
+        baseX: parseFloat(style.getPropertyValue("--mini-x")) || 0,
+        baseY: parseFloat(style.getPropertyValue("--mini-y")) || 0
       };
       els.miniPlayer.setPointerCapture(event.pointerId);
     });
+
     els.miniPlayer.addEventListener("pointermove", (event) => {
       if (!miniDrag) return;
-      const nextLeft = Math.min(window.innerWidth - miniDrag.rect.width - 8, Math.max(8, miniDrag.rect.left + event.clientX - miniDrag.startX));
-      const nextTop = Math.min(window.innerHeight - miniDrag.rect.height - 8, Math.max(8, miniDrag.rect.top + event.clientY - miniDrag.startY));
-      els.miniPlayer.style.left = `${nextLeft}px`;
-      els.miniPlayer.style.top = `${nextTop}px`;
-      els.miniPlayer.style.right = "auto";
-      els.miniPlayer.style.bottom = "auto";
+      event.preventDefault();
+      const wantedLeft = miniDrag.rect.left + event.clientX - miniDrag.startX;
+      const wantedTop = miniDrag.rect.top + event.clientY - miniDrag.startY;
+      const nextLeft = Math.min(window.innerWidth - miniDrag.rect.width - 8, Math.max(8, wantedLeft));
+      const nextTop = Math.min(window.innerHeight - miniDrag.rect.height - 8, Math.max(8, wantedTop));
+      els.miniPlayer.style.setProperty("--mini-x", `${miniDrag.baseX + nextLeft - miniDrag.rect.left}px`);
+      els.miniPlayer.style.setProperty("--mini-y", `${miniDrag.baseY + nextTop - miniDrag.rect.top}px`);
     });
+
     els.miniPlayer.addEventListener("pointerup", () => {
       miniDrag = null;
     });
+
+    els.miniPlayer.addEventListener("pointercancel", () => {
+      miniDrag = null;
+    });
+
+    window.addEventListener("resize", resetMobilePosition);
   }
 
   function toast(message, action) {

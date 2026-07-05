@@ -162,7 +162,7 @@ body.dark-theme .bg-brand {
 .topbar {
   position: sticky;
   top: 14px;
-  z-index: 20;
+  z-index: 80;
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
@@ -170,6 +170,13 @@ body.dark-theme .bg-brand {
   min-height: 72px;
   padding: 10px 14px;
   border-radius: var(--radius-xl);
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(215, 218, 224, 0.78));
+}
+
+body.dark-theme .topbar {
+  background: linear-gradient(180deg, rgba(55, 59, 68, 0.96), rgba(43, 46, 53, 0.88));
 }
 
 .brand {
@@ -851,6 +858,9 @@ input[type="range"] {
   max-width: calc(100vw - 36px);
   padding: 10px;
   border-radius: var(--radius-lg);
+  touch-action: none;
+  will-change: transform;
+  transform: translate3d(var(--mini-x, 0px), var(--mini-y, 0px), 0);
 }
 
 .mini-player img {
@@ -1058,8 +1068,11 @@ kbd {
   .mini-player {
     left: 10px;
     right: 10px;
+    top: auto !important;
     bottom: 88px;
     grid-template-columns: 44px minmax(0, 1fr) auto;
+    touch-action: auto;
+    transform: none !important;
   }
 }
 

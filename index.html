@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#eef0f3" />
+    <meta
+      name="description"
+      content="ShinPlay is a responsive YouTube link-in music player with local queue, library, playlists, exports, and PWA support."
+    />
+    <title>ShinPlay</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./assets/icon-192.png" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <svg aria-hidden="true" class="icon-sprite" xmlns="http://www.w3.org/2000/svg">
+      <symbol id="i-add" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-airplay" viewBox="0 0 24 24"><path d="M5 17H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-1"/><path d="m12 15 5 6H7Z"/></symbol>
+      <symbol id="i-arrow-down" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></symbol>
+      <symbol id="i-arrow-up" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m20 6-11 11-5-5"/></symbol>
+      <symbol id="i-chevron-left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+      <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></symbol>
+      <symbol id="i-command" viewBox="0 0 24 24"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0 0-6Z"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2"/><rect x="4" y="4" width="11" height="11" rx="2"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5"/><path d="M5 21h14"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19.5 12.6 12 20l-7.5-7.4A5 5 0 0 1 12 6a5 5 0 0 1 7.5 6.6Z"/></symbol>
+      <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+      <symbol id="i-import" viewBox="0 0 24 24"><path d="M12 21V9M7 14l5-5 5 5"/><path d="M5 3h14"/></symbol>
+      <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="14.5" r="4.5"/><path d="m11 11 9-9"/><path d="m15 6 3 3"/></symbol>
+      <symbol id="i-library" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h11v18H6a2 2 0 0 1-2-1.5Z"/><path d="M8 7h5M8 11h5"/></symbol>
+      <symbol id="i-list" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.5A8 8 0 1 1 8.5 4 7 7 0 0 0 20 15.5Z"/></symbol>
+      <symbol id="i-more" viewBox="0 0 24 24"><path d="M12 5h.01M12 12h.01M12 19h.01"/></symbol>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 12 7-12 7Z"/></symbol>
+      <symbol id="i-repeat" viewBox="0 0 24 24"><path d="m17 2 4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="m7 22-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.9-.3 1.7 1.7 0 0 0-1 1.6V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1-1.5 1.7 1.7 0 0 0-1.9.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.9 1.7 1.7 0 0 0-1.6-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1 1.7 1.7 0 0 0-.3-1.9L4.2 7A2 2 0 1 1 7 4.2l.1.1a1.7 1.7 0 0 0 1.9.3H9a1.7 1.7 0 0 0 1-1.6V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.9-.3l.1-.1A2 2 0 1 1 19.8 7l-.1.1a1.7 1.7 0 0 0-.3 1.9v.1a1.7 1.7 0 0 0 1.6 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1Z"/></symbol>
+      <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.7 6.8-4.4M8.6 13.3l6.8 4.4"/></symbol>
+      <symbol id="i-shuffle" viewBox="0 0 24 24"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="m15 15 6 6"/><path d="m4 4 5 5"/></symbol>
+      <symbol id="i-skip-back" viewBox="0 0 24 24"><path d="M19 20 9 12l10-8v16Z"/><path d="M5 19V5"/></symbol>
+      <symbol id="i-skip-forward" viewBox="0 0 24 24"><path d="m5 4 10 8-10 8V4Z"/><path d="M19 5v14"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3"/><path d="M2 14h4M10 8h4M18 16h4"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="m19 6-1 15H6L5 6"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4Z"/><path d="M15 9.5a4 4 0 0 1 0 5M18 7a8 8 0 0 1 0 10"/></symbol>
+      <symbol id="i-wave" viewBox="0 0 24 24"><path d="M3 12h2l2-6 4 12 3-9 2 3h5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    </svg>
+
+    <div class="bg-brand" aria-hidden="true"></div>
+    <div class="app-shell">
+      <header class="topbar glass">
+        <a class="brand" href="#player" aria-label="ShinPlay player">
+          <img src="./assets/logo.png" alt="ShinPlay logo" />
+          <span>
+            <strong>ShinPlay</strong>
+            <small>Play more, smile more</small>
+          </span>
+        </a>
+        <nav class="topnav" aria-label="Primary">
+          <a class="nav-link active" href="#player" data-route="player"><svg><use href="#i-home"></use></svg><span>Player</span></a>
+          <a class="nav-link" href="#browse" data-route="browse"><svg><use href="#i-search"></use></svg><span>Browse</span></a>
+          <a class="nav-link" href="#queue" data-route="queue"><svg><use href="#i-list"></use></svg><span>Queue</span></a>
+          <a class="nav-link" href="#library" data-route="library"><svg><use href="#i-library"></use></svg><span>Library</span></a>
+        </nav>
+        <div class="top-actions">
+          <button class="icon-button" id="themeToggle" type="button" aria-label="Toggle dark theme"><svg><use href="#i-moon"></use></svg></button>
+          <button class="icon-button" id="settingsButton" type="button" aria-label="Open settings"><svg><use href="#i-settings"></use></svg></button>
+        </div>
+      </header>
+
+      <main>
+        <section class="route active" id="route-player" aria-labelledby="player-title">
+          <div class="hero-card glass">
+            <div class="hero-copy">
+              <p class="eyebrow">YouTube link-in, music-out</p>
+              <h1 id="player-title">A clean little theater for your YouTube music queue.</h1>
+              <p class="hero-text">
+                Paste a YouTube URL, build a local queue, save favorites, export playlists, and keep controls close on any screen size.
+              </p>
+            </div>
+            <img class="hero-logo" src="./assets/logo.png" alt="" aria-hidden="true" />
+          </div>
+
+          <form class="input-card glass" id="loadForm">
+            <label for="urlInput">YouTube URL or video ID</label>
+            <div class="url-row">
+              <input id="urlInput" name="url" autocomplete="off" inputmode="url" placeholder="https://www.youtube.com/watch?v=..." />
+              <button class="primary-button" type="submit"><svg><use href="#i-play"></use></svg><span>Load</span></button>
+            </div>
+            <div class="quick-row">
+              <button class="ghost-button" id="addToQueueButton" type="button"><svg><use href="#i-add"></use></svg><span>Add to queue</span></button>
+              <button class="ghost-button" id="shareCurrentButton" type="button"><svg><use href="#i-share"></use></svg><span>Share link</span></button>
+              <button class="ghost-button" id="downloadButton" type="button"><svg><use href="#i-download"></use></svg><span>Download tools</span></button>
+            </div>
+          </form>
+
+          <div class="player-grid">
+            <section class="player-card glass" aria-labelledby="now-playing-title">
+              <div class="video-shell" id="videoShell">
+                <div id="youtube-player" class="youtube-player" title="YouTube player"></div>
+                <div class="audio-cover" aria-hidden="true">
+                  <img src="./assets/logo.png" alt="" />
+                  <span>Audio only mode</span>
+                </div>
+              </div>
+              <div class="now-row">
+                <img id="currentThumb" src="./assets/logo.png" alt="" />
+                <div>
+                  <p class="eyebrow" id="playerStatus">Ready</p>
+                  <h2 id="now-playing-title">Paste a link to start</h2>
+                  <p id="nowMeta">Your queue, favorites, and history stay on this device.</p>
+                </div>
+              </div>
+              <div class="progress-wrap">
+                <span id="elapsedTime">0:00</span>
+                <input id="seekRange" type="range" min="0" max="100" value="0" aria-label="Seek playback" />
+                <span id="durationTime">0:00</span>
+              </div>
+              <div class="transport" aria-label="Playback controls">
+                <button class="icon-button" id="previousButton" type="button" aria-label="Previous track"><svg><use href="#i-skip-back"></use></svg></button>
+                <button class="play-button" id="playPauseButton" type="button" aria-label="Play"><svg><use href="#i-play"></use></svg></button>
+                <button class="icon-button" id="nextButton" type="button" aria-label="Next track"><svg><use href="#i-skip-forward"></use></svg></button>
+              </div>
+              <div class="control-grid">
+                <label class="toggle-row"><input id="audioOnlyToggle" type="checkbox" /> <span>Audio only</span></label>
+                <label class="toggle-row"><input id="theaterToggle" type="checkbox" /> <span>Theater</span></label>
+                <label class="range-row"><svg><use href="#i-volume"></use></svg><input id="volumeRange" type="range" min="0" max="100" value="80" aria-label="Volume" /></label>
+                <label class="select-row"><span>Speed</span><select id="speedSelect" aria-label="Playback speed"><option>0.5</option><option>0.75</option><option selected>1</option><option>1.25</option><option>1.5</option><option>1.75</option><option>2</option></select></label>
+              </div>
+            </section>
+
+            <aside class="side-stack">
+              <section class="mini-card glass">
+                <div class="section-head">
+                  <div>
+                    <p class="eyebrow">Waveform</p>
+                    <h2>Playback pulse</h2>
+                  </div>
+                  <span class="live-dot" id="liveDot" hidden>Live</span>
+                </div>
+                <div class="wave-bars" aria-hidden="true">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </section>
+              <section class="mini-card glass">
+                <div class="section-head">
+                  <div>
+                    <p class="eyebrow">Sleep timer</p>
+                    <h2>Fade out gently</h2>
+                  </div>
+                  <button class="icon-button small" id="cancelSleepButton" type="button" aria-label="Cancel sleep timer"><svg><use href="#i-x"></use></svg></button>
+                </div>
+                <div class="timer-buttons" role="group" aria-label="Sleep timer options">
+                  <button type="button" data-sleep="10">10m</button>
+                  <button type="button" data-sleep="20">20m</button>
+                  <button type="button" data-sleep="30">30m</button>
+                  <button type="button" data-sleep="60">60m</button>
+                </div>
+                <p id="sleepStatus" class="muted">No timer set.</p>
+              </section>
+              <section class="mini-card glass">
+                <div class="section-head">
+                  <div>
+                    <p class="eyebrow">Equalizer</p>
+                    <h2>Quick tone</h2>
+                  </div>
+                  <svg class="head-icon"><use href="#i-sliders"></use></svg>
+                </div>
+                <label class="range-block">Bass <input id="bassRange" type="range" min="-10" max="10" value="0" /></label>
+                <label class="range-block">Treble <input id="trebleRange" type="range" min="-10" max="10" value="0" /></label>
+                <p class="muted">Tone controls use browser audio where supported by the embedded player.</p>
+              </section>
+            </aside>
+          </div>
+        </section>
+
+        <section class="route" id="route-browse" aria-labelledby="browse-title">
+          <div class="section-head page-head">
+            <div>
+              <p class="eyebrow">Browse</p>
+              <h1 id="browse-title">Search YouTube with your own API key.</h1>
+            </div>
+            <button class="ghost-button" id="saveApiKeyButton" type="button"><svg><use href="#i-key"></use></svg><span>Save key</span></button>
+          </div>
+          <section class="input-card glass">
+            <label for="apiKeyInput">YouTube Data API key, stored only in this browser</label>
+            <input id="apiKeyInput" type="password" autocomplete="off" placeholder="AIza..." />
+            <form class="browse-form" id="searchForm">
+              <label for="searchInput">Search query</label>
+              <div class="url-row">
+                <input id="searchInput" placeholder="lofi mix, anime opening, live performance" />
+                <button class="primary-button" type="submit"><svg><use href="#i-search"></use></svg><span>Search</span></button>
+              </div>
+              <div class="filter-row">
+                <select id="durationFilter" aria-label="Duration filter"><option value="">Any duration</option><option value="short">Short</option><option value="medium">Medium</option><option value="long">Long</option></select>
+                <select id="dateFilter" aria-label="Upload date filter"><option value="">Any date</option><option value="today">Today</option><option value="week">This week</option><option value="month">This month</option><option value="year">This year</option></select>
+                <input id="channelFilter" placeholder="Channel ID optional" aria-label="Channel ID filter" />
+              </div>
+            </form>
+            <p class="muted">Without an API key, ShinPlay can still load pasted links and open a YouTube search in a new tab.</p>
+          </section>
+          <div class="toolbar-row">
+            <button class="ghost-button" id="openYoutubeSearch" type="button"><svg><use href="#i-external"></use></svg><span>Open YouTube search</span></button>
+          </div>
+          <div class="card-grid" id="searchResults" aria-live="polite"></div>
+        </section>
+
+        <section class="route" id="route-queue" aria-labelledby="queue-title">
+          <div class="section-head page-head">
+            <div>
+              <p class="eyebrow">Queue</p>
+              <h1 id="queue-title">Tap, reorder, shuffle, repeat.</h1>
+            </div>
+            <div class="head-actions">
+              <button class="ghost-button" id="shuffleButton" type="button"><svg><use href="#i-shuffle"></use></svg><span>Shuffle</span></button>
+              <button class="ghost-button" id="repeatButton" type="button"><svg><use href="#i-repeat"></use></svg><span>Repeat off</span></button>
+              <button class="icon-button" id="clearQueueButton" type="button" aria-label="Clear queue"><svg><use href="#i-trash"></use></svg></button>
+            </div>
+          </div>
+          <div class="playlist-row glass">
+            <label for="playlistSelect">Playlist</label>
+            <select id="playlistSelect"></select>
+            <input id="playlistNameInput" placeholder="New playlist name" />
+            <button class="ghost-button" id="createPlaylistButton" type="button"><svg><use href="#i-add"></use></svg><span>Create</span></button>
+            <button class="icon-button" id="deletePlaylistButton" type="button" aria-label="Delete playlist"><svg><use href="#i-trash"></use></svg></button>
+          </div>
+          <div class="queue-list glass" id="queueList" aria-live="polite"></div>
+        </section>
+
+        <section class="route" id="route-library" aria-labelledby="library-title">
+          <div class="section-head page-head">
+            <div>
+              <p class="eyebrow">Library</p>
+              <h1 id="library-title">Favorites, history, imports, exports.</h1>
+            </div>
+            <div class="head-actions">
+              <button class="ghost-button" id="importButton" type="button"><svg><use href="#i-import"></use></svg><span>Import</span></button>
+              <button class="ghost-button" id="exportButton" type="button"><svg><use href="#i-download"></use></svg><span>Export</span></button>
+              <input id="importFile" type="file" accept=".json,.m3u,.m3u8,.csv" hidden />
+            </div>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Library sections">
+            <button class="active" role="tab" aria-selected="true" data-library="favorites">Favorites</button>
+            <button role="tab" aria-selected="false" data-library="history">History</button>
+          </div>
+          <div class="card-grid" id="libraryGrid" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <aside class="mini-player glass" id="miniPlayer" aria-label="Mini player">
+      <img id="miniThumb" src="./assets/logo.png" alt="" />
+      <div>
+        <strong id="miniTitle">Nothing playing</strong>
+        <span id="miniSub">Ready</span>
+      </div>
+      <button class="icon-button small" id="miniPlayButton" type="button" aria-label="Play mini player"><svg><use href="#i-play"></use></svg></button>
+    </aside>
+
+    <nav class="bottom-nav glass" aria-label="Mobile primary">
+      <a class="nav-link active" href="#player" data-route="player"><svg><use href="#i-home"></use></svg><span>Player</span></a>
+      <a class="nav-link" href="#browse" data-route="browse"><svg><use href="#i-search"></use></svg><span>Browse</span></a>
+      <a class="nav-link" href="#queue" data-route="queue"><svg><use href="#i-list"></use></svg><span>Queue</span></a>
+      <a class="nav-link" href="#library" data-route="library"><svg><use href="#i-library"></use></svg><span>Library</span></a>
+    </nav>
+
+    <dialog class="modal glass" id="downloadModal">
+      <form method="dialog" class="modal-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Download tools</p>
+            <h2>Useful saves without media ripping.</h2>
+          </div>
+          <button class="icon-button" value="close" aria-label="Close download tools"><svg><use href="#i-x"></use></svg></button>
+        </div>
+        <p class="muted">
+          ShinPlay does not extract YouTube video or audio streams. Use these tools to save your own local lists, thumbnails, and official links.
+        </p>
+        <div class="action-grid">
+          <button type="button" data-download="json"><svg><use href="#i-download"></use></svg><span>Export JSON</span></button>
+          <button type="button" data-download="m3u"><svg><use href="#i-download"></use></svg><span>Export M3U</span></button>
+          <button type="button" data-download="csv"><svg><use href="#i-download"></use></svg><span>Export CSV</span></button>
+          <button type="button" id="thumbnailButton"><svg><use href="#i-download"></use></svg><span>Save thumbnail</span></button>
+          <button type="button" id="copyShinLinkButton"><svg><use href="#i-copy"></use></svg><span>Copy ShinPlay link</span></button>
+          <a id="officialDownloadLink" class="action-link" href="https://www.youtube.com/premium" target="_blank" rel="noreferrer"><svg><use href="#i-external"></use></svg><span>Official YouTube options</span></a>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="modal glass" id="settingsModal">
+      <form method="dialog" class="modal-card">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Settings</p>
+            <h2>App controls</h2>
+          </div>
+          <button class="icon-button" value="close" aria-label="Close settings"><svg><use href="#i-x"></use></svg></button>
+        </div>
+        <label class="toggle-row"><input id="wakeLockToggle" type="checkbox" /> <span>Keep screen awake while playing</span></label>
+        <label class="toggle-row"><input id="reducedMotionToggle" type="checkbox" /> <span>Reduce non-essential motion</span></label>
+        <div class="shortcut-list">
+          <p><kbd>Space</kbd><span>Play or pause</span></p>
+          <p><kbd>Shift</kbd> + <kbd>Right</kbd><span>Next track</span></p>
+          <p><kbd>Shift</kbd> + <kbd>Left</kbd><span>Previous track</span></p>
+          <p><kbd>?</kbd><span>Open this sheet</span></p>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

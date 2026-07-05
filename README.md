@@ -1,5 +1,7 @@
 <div align="center">
 
+<img width="90" height="90" alt="shinplay-logo" src="https://github.com/user-attachments/assets/6a0dc6da-ef07-43b3-a723-8831ee54ef4b" />
+
 # ShinPlay
 **A clean little theater for your YouTube music queue.**
 
